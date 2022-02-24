@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<port-knocker-configuration filter="(port 22) or (port 50005 or port 50010)">
+  <system type="windows">
+    <conditions protocol="tcp">
+      <condition port="22" payload="5353482d322e30">echo SSH Server connection to %DESTINATION_IP%:%DESTINATION_PORT%</condition>
+      <condition port="-1" payload="5353482d322e30">echo SSH Client connection from %DESTINATION_IP%:%DESTINATION_PORT%</condition>
+      <condition port="22" payload="48484848">echo test</condition>
+    </conditions>
+    <conditions protocol="udp">
+      <condition port="50005" payload="48484848">netsh advfirewall set allprofiles state on</condition>
+      <condition port="50010" payload="48484848">netsh advfirewall set allprofiles state off</condition>
+    </conditions>
+  </system>
+
+  <system type="linux" version="fedora 33.0">
+    <conditions protocol="tcp">
+      <condition port="22" payload="5353482d322e30">echo Fedora SSH Server connection to %DESTINATION_IP%:%DESTINATION_PORT%</condition>
+      <condition port="-1" payload="5353482d322e30">echo Fedora SSH Client connection from %DESTINATION_IP%:%DESTINATION_PORT%</condition>
+      <condition port="22" payload="48484848">echo Fedora test</condition>
+    </conditions>
+    <conditions protocol="udp">
+      <condition port="50005" payload="48484848">systemctl start firewalld</condition>
+      <condition port="50010" payload="48484848">systemctl stop firewalld</condition>
+    </conditions>
+  </system>
+
+  <system type="linux">
+    <conditions protocol="tcp">
+      <condition port="22" payload="5353482d322e30">echo Misc SSH Server connection to %DESTINATION_IP%:%DESTINATION_PORT%</condition>
+      <condition port="-1" payload="5353482d322e30">echo Misc SSH Client connection from %DESTINATION_IP%:%DESTINATION_PORT%</condition>
+      <condition port="22" payload="48484848">echo Misc test</condition>
+    </conditions>
+    <conditions protocol="udp">
+      <condition port="50005" payload="48484848">systemctl start firewalld</condition>
+      <condition port="50010" payload="48484848">systemctl stop firewalld</condition>
+    </conditions>
+  </system>
+</port-knocker-configuration>

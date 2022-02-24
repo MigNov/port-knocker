@@ -1,0 +1,9 @@
+TCP to SSH port:
+send-packet-data 192.168.122.104 tcp 22 HHHH
+
+UDP:
+send-packet-data 192.168.122.104 udp 50005 HHHH
+send-packet-data 192.168.122.104 udp 50010 HHHH
+
+SCP Transfer to Windows system:
+scp /usr/bin/send-packet-data mig@192.168.122.104:C:/Projects/knocker/linux
